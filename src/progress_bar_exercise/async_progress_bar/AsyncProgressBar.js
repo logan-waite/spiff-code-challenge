@@ -28,7 +28,7 @@ export default function AsyncProgressBar({requestState = 'inactive', onFinished}
             setTimeout(() => {
                 onFinished()
                 setProgress(0)
-            }, 5000) // 1s for finishing, 3s wait, 1s fadeout
+            }, 4000) // 1s for finishing, 2s wait, 1s fadeout
 
             clearInterval(progressInterval);
         } 
