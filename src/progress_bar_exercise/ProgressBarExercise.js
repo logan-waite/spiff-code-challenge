@@ -1,5 +1,6 @@
 import React from "react";
 import Exercise from "../exercise/Exercise";
+import OutlineButton from "./outline_button/OutlineButton";
 
 const ProgressBarExercise = () => {
   return (
@@ -18,5 +19,8 @@ export default ProgressBarExercise;
 // ----------------------------------------------------------------------------------
 
 const Solution = () => {
-  return <div>Add solution here</div>;
+  return <div>
+    <OutlineButton color='green'>Start Request</OutlineButton>
+    <OutlineButton color='red'>Finish Request</OutlineButton>
+  </div>;
 };
