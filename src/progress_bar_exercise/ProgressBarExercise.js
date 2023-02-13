@@ -21,6 +21,7 @@ export default ProgressBarExercise;
 
 const Solution = () => {
   const [requestState, setRequestState] = useState('inactive')
+  const [breakpointBar, setBreakpointBar] = useState(false);
 
   function startRequest() {
     setRequestState('started')
@@ -33,11 +34,13 @@ const Solution = () => {
   function deactivateRequest() {
     setRequestState('inactive');
   }
-return <div>
-    <AsyncProgressBar requestState={requestState} onFinished={deactivateRequest}></AsyncProgressBar>
-    <div className="buttons" style={{display: 'flex', width: '325px', height: '50px', alignItems: 'center', justifyContent: 'space-between'}}>
+return (<div>
+    <AsyncProgressBar requestState={requestState} onFinished={deactivateRequest} breakpoints={breakpointBar ? [15, 45, 75] : []} />
+    <div className="buttons" style={{display: 'flex', width: '350px', height: '50px', alignItems: 'center', justifyContent: 'space-between'}}>
       <OutlineButton color='green' onClick={startRequest} disabled={requestState === 'started'}>{requestState === 'started' ? 'Loading...' : 'Start Request' }</OutlineButton>
       <OutlineButton color='red' onClick={finishRequest} disabled={requestState !== 'started'}>Finish Request</OutlineButton>
     </div>
-  </div>;
+      <OutlineButton onClick={() => setBreakpointBar(!breakpointBar)}>{`${breakpointBar ? 'Using' : 'Not Using'} Breakpoints`}</OutlineButton>
+
+  </div>);
 };
