@@ -20,7 +20,8 @@ export default ProgressBarExercise;
 
 const Solution = () => {
   return <div>
-    <OutlineButton color='green'>Start Request</OutlineButton>
-    <OutlineButton color='red'>Finish Request</OutlineButton>
+    <ProgressBar progress={90}></ProgressBar>
+    <OutlineButton color='green' onClick={() => console.log('start clicked')}>Start Request</OutlineButton>
+    <OutlineButton color='red' onClick={() => console.log('finish clicked')}>Finish Request</OutlineButton>
   </div>;
 };
