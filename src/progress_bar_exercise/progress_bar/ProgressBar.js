@@ -1,6 +1,6 @@
 import React from "react"
 
-export function ProgressBar({progress}) {
+export function ProgressBar({progress, fadeOut}) {
     const percent = progress > 100 ? 100 
                     : progress < 0 ? 0 
                     : progress;
@@ -10,5 +10,5 @@ export function ProgressBar({progress}) {
     const percentHidden = 100 - percent;
     const hiddenAmount = percentHidden * vw / 100
 
-    return <div className="progress-bar" style={{clipPath: `inset(0px ${hiddenAmount}px 0px 0px)`}}></div>
+    return <div className={`progress-bar ${fadeOut ? 'progress-bar--fade-out' : ''}`} style={{clipPath: `inset(0px ${hiddenAmount}px 0px 0px)`}}></div>
 }

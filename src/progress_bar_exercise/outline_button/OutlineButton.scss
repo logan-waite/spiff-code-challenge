@@ -8,11 +8,15 @@
     font-size: 12px;
     letter-spacing: 1px;
 
-    &:hover {
+    &:disabled {
+        opacity: 50%;
+    }
+
+    &:hover:not([disabled]) {
         border-width: 2px;
     }
 
-    &:active {
+    &:active:not([disabled]) {
         border-width: 3px;
     }
 

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Exercise from "../exercise/Exercise";
+import AsyncProgressBar from "./async_progress_bar/AsyncProgressBar";
 import OutlineButton from "./outline_button/OutlineButton";
 
 const ProgressBarExercise = () => {
@@ -19,9 +20,24 @@ export default ProgressBarExercise;
 // ----------------------------------------------------------------------------------
 
 const Solution = () => {
-  return <div>
-    <ProgressBar progress={90}></ProgressBar>
-    <OutlineButton color='green' onClick={() => console.log('start clicked')}>Start Request</OutlineButton>
-    <OutlineButton color='red' onClick={() => console.log('finish clicked')}>Finish Request</OutlineButton>
+  const [requestState, setRequestState] = useState('inactive')
+
+  function startRequest() {
+    setRequestState('started')
+  }
+
+  function finishRequest() {
+    setRequestState('finished')
+  }
+
+  function deactivateRequest() {
+    setRequestState('inactive');
+  }
+return <div>
+    <AsyncProgressBar requestState={requestState} onFinished={deactivateRequest}></AsyncProgressBar>
+    <div className="buttons" style={{display: 'flex', width: '325px', height: '50px', alignItems: 'center', justifyContent: 'space-between'}}>
+      <OutlineButton color='green' onClick={startRequest} disabled={requestState === 'started'}>{requestState === 'started' ? 'Loading...' : 'Start Request' }</OutlineButton>
+      <OutlineButton color='red' onClick={finishRequest} disabled={requestState !== 'started'}>Finish Request</OutlineButton>
+    </div>
   </div>;
 };

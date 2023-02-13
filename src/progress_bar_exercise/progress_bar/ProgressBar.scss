@@ -5,4 +5,10 @@
     width: 100vw;
     height: 6px;
     background: linear-gradient(to right, $sunrise, $red);
+    transition: clip-path 1s linear;
+
+    &--fade-out {
+        opacity: 0%;
+        transition: opacity 1s 3s;
+    }
 }
