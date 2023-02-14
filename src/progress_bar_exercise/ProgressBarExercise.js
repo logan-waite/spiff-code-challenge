@@ -20,27 +20,49 @@ export default ProgressBarExercise;
 // ----------------------------------------------------------------------------------
 
 const Solution = () => {
-  const [requestState, setRequestState] = useState('inactive')
+  const [requestState, setRequestState] = useState("inactive");
   const [breakpointBar, setBreakpointBar] = useState(false);
 
-  function startRequest() {
-    setRequestState('started')
+  function GreenButton(props) {
+    return (
+      <OutlineButton className="outline_button--green" {...props}>
+        {props.children}
+      </OutlineButton>
+    );
   }
 
-  function finishRequest() {
-    setRequestState('finished')
+  function RedButton(props) {
+    return (
+      <OutlineButton className={"outline_button--red"} {...props}>
+        {props.children}
+      </OutlineButton>
+    );
   }
 
-  function deactivateRequest() {
-    setRequestState('inactive');
-  }
-return (<div>
-    <AsyncProgressBar requestState={requestState} onFinished={deactivateRequest} breakpoints={breakpointBar ? [15, 45, 75] : []} />
-    <div className="buttons" style={{display: 'flex', width: '350px', height: '50px', alignItems: 'center', justifyContent: 'space-between'}}>
-      <OutlineButton color='green' onClick={startRequest} disabled={requestState === 'started'}>{requestState === 'started' ? 'Loading...' : 'Start Request' }</OutlineButton>
-      <OutlineButton color='red' onClick={finishRequest} disabled={requestState !== 'started'}>Finish Request</OutlineButton>
+  return (
+    <div>
+      <AsyncProgressBar
+        requestState={requestState}
+        onFinished={() => setRequestState("inactive")}
+        breakpoints={breakpointBar ? [25, 50, 75] : []}
+      />
+      <div className="buttons">
+        <GreenButton
+          onClick={() => setRequestState("started")}
+          disabled={requestState !== "inactive"}
+        >
+          {requestState === "started" ? "Loading..." : "Start Request"}
+        </GreenButton>
+        <RedButton
+          onClick={() => setRequestState("finished")}
+          disabled={requestState !== "started"}
+        >
+          Finish Request
+        </RedButton>
+      </div>
+      <OutlineButton onClick={() => setBreakpointBar(!breakpointBar)}>{`${
+        breakpointBar ? "Using" : "Not Using"
+      } Breakpoints`}</OutlineButton>
     </div>
-      <OutlineButton onClick={() => setBreakpointBar(!breakpointBar)}>{`${breakpointBar ? 'Using' : 'Not Using'} Breakpoints`}</OutlineButton>
-
-  </div>);
+  );
 };
